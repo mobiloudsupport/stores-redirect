@@ -129,7 +129,6 @@ a, a:visited, a:active {
         margin-bottom: 0.5em;
     }
 
-    .alert-icon{
-        width: 20px;
+    #errorMsg .error-icon path{
         fill: #047857;
     }
