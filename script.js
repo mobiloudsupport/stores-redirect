@@ -14,7 +14,7 @@ function getMobileOS() {
 	}
 	
 	// iOS detection from: http://stackoverflow.com/a/9039885/177710
-	if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+	if (/ipad|iphone|ipod/.test(userAgent) && !window.MSStream) {
 		return "ios";
 	}
 	
@@ -33,37 +33,29 @@ document.addEventListener("DOMContentLoaded", function(){
     const redirectingMsg = document.getElementById("redirectingMsg");
     const iosBadge = document.getElementById("iosBadge");
     const androidBadge = document.getElementById("androidBadge");
+
+    function showBadges(platform) {
+        console.log(platform + " | empty param or invalid device")
+        redirectingMsg.classList.add('hidden');
+        errorMsg.classList.remove('hidden');
+        if(iosUrl){
+            iosBadge.classList.remove("hidden");
+            iosBadge.href = iosUrl
+        };
+        if (androidUrl) {
+            androidBadge.classList.remove('hidden');
+            androidBadge.href = androidUrl
+        }
+    }
     switch (platform) {
         case 'android':
-            if(androidUrl){
-                window.location.href = androidUrl;
-                
-            }
-            else{
-                console.log("android | invalid or empty param")
-            }
+            androidUrl ? window.location.href = androidUrl :  showBadges(platform) 
             break;
         case 'ios':
-            console.log(iosUrl);
-            if(iosUrl  && iosUrl.length > 0){
-                window.location.href = iosUrl;                
-            }
-            else{
-                console.log("ios | invalid or empty param")
-            }
+            iosUrl ? window.location.href = iosUrl : showBadges(platform)
             break
         default:
-            redirectingMsg.classList.add('hidden');
-            errorMsg.classList.remove('hidden');
-            if(iosUrl){
-                iosBadge.classList.remove("hidden");
-                iosBadge.href = iosUrl
-            };
-            if (androidUrl) {
-                androidBadge.classList.remove('hidden');
-                androidBadge.href = androidUrl
-
-            }
+            showBadges(platform)            
             break;
     }
 });
