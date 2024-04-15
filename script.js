@@ -36,21 +36,23 @@ document.addEventListener("DOMContentLoaded", function(){
     const androidBadge = document.getElementById("androidBadge");
     const urlRegex = /^(http|https):\/\//
 
-    // shows 404 if no links provided
-    if( !iosUrl && !androidUrl || !urlRegex.test(iosUrl) && !urlRegex.test(androidUrl) ){
-        errorMsg.classList.remove('hidden');
-        redirectingMsg.classList.add('hidden')
-        return
-    }
+  
+
     function showBadges(platform) {
+        // shows 404 if no links provided
+        if( !iosUrl && !androidUrl || !urlRegex.test(iosUrl) && !urlRegex.test(androidUrl) ){
+            errorMsg.classList.remove('hidden');
+            redirectingMsg.classList.add('hidden')
+            return
+        }
         console.log(platform + " | empty param or invalid device")
         redirectingMsg.classList.add('hidden');
         downloadMsg.classList.remove('hidden');
-        if(iosUrl){
+        if(iosUrl && urlRegex.test(iosUrl)){
             iosBadge.classList.remove("hidden");
             iosBadge.href = iosUrl
         };
-        if (androidUrl) {
+        if (androidUrl && urlRegex.test(androidUrl)) {
             androidBadge.classList.remove('hidden');
             androidBadge.href = androidUrl
         }
