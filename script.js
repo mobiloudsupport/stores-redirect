@@ -29,15 +29,23 @@ document.addEventListener("DOMContentLoaded", function(){
     const iosUrl = urlParams.get('ios');
     const androidUrl = urlParams.get('android');
     const platform = getMobileOS();
-    const errorMsg = document.getElementById("errorMsg");
+    const downloadMsg = document.getElementById("downloadMsg");
     const redirectingMsg = document.getElementById("redirectingMsg");
+    const errorMsg = document.getElementById("errorMsg");
     const iosBadge = document.getElementById("iosBadge");
     const androidBadge = document.getElementById("androidBadge");
+    const urlRegex = /^(http|https):\/\//
 
+    // shows 404 if no links provided
+    if( !iosUrl && !androidUrl || !urlRegex.test(iosUrl) && !urlRegex.test(androidUrl) ){
+        errorMsg.classList.remove('hidden');
+        redirectingMsg.classList.add('hidden')
+        return
+    }
     function showBadges(platform) {
         console.log(platform + " | empty param or invalid device")
         redirectingMsg.classList.add('hidden');
-        errorMsg.classList.remove('hidden');
+        downloadMsg.classList.remove('hidden');
         if(iosUrl){
             iosBadge.classList.remove("hidden");
             iosBadge.href = iosUrl
@@ -47,6 +55,8 @@ document.addEventListener("DOMContentLoaded", function(){
             androidBadge.href = androidUrl
         }
     }
+    console.log('asdf')
+
     switch (platform) {
         case 'android':
             androidUrl ? window.location.href = androidUrl :  showBadges(platform) 
