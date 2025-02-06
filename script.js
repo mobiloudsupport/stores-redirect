@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function(){
     const externalLinkBtn = document.getElementById("externalLinkBtn");
     const androidBadge = document.getElementById("androidBadge");
     const urlRegex = /^(http|https):\/\//
-
+    const buttonColor = urlParams.get('buttonColor');
   
 
     function showBadges(platform) {
@@ -51,6 +51,8 @@ document.addEventListener("DOMContentLoaded", function(){
         redirectingMsg.classList.add('hidden');
         downloadMsg.classList.remove('hidden');
         if(redirectUrl && urlRegex.test(redirectUrl)){
+            console.log(buttonColor)
+            buttonColor ? externalLinkBtn.style.backgroundColor = "#" + buttonColor : externalLinkBtn.style.backgroundColor = "#000000"
             externalMsg.classList.remove("hidden");
             downloadMsg.classList.add('hidden');
             externalLinkBtn.href = redirectUrl
