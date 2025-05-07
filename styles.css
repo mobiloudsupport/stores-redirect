@@ -122,11 +122,12 @@ a, a:visited, a:active {
     }
     
     .badges{
-        margin-top: 20px;
+        margin-top: 16px;
     }
-    .badges svg{
+    .badges a{
         display: block;
-        margin-bottom: 0.5em;
+        margin-bottom: 0.8em;
+        font-weight: 500;
     }
 
     #iconMsg .download-icon path{
